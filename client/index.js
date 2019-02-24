@@ -6,8 +6,11 @@ import { Router, hashHistory, Route, IndexRoute } from 'react-router'
 
 
 import App from './components/App'
+import Dashboard from './components/Dashboard'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm';
+
+import requireAuth from './components/requireAuth'
 
 const networkInterface = createNetworkInterface({
 	opts: {
@@ -28,6 +31,7 @@ const Root = () => {
 			<Route path="/" component={App}>
 				<Route path="login" component={LoginForm} />
 				<Route path="signup" component={RegisterForm} />
+				<Route path="dashboard" component={requireAuth(Dashboard)} />
 			</Route>
 		</Router>
 	</ApolloProvider>

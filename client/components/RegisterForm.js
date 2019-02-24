@@ -3,13 +3,20 @@ import AuthForm from './AuthForm'
 import { graphql } from 'react-apollo'
 import registerMutation from '../mutations/registerMutation'
 import currentUserQuery from '../queries/CurrentUser'
-
+import { hashHistory } from 'react-router'
 class RegisterForm extends Component {
 
 	constructor(props) {
 		super(props)
 
 		this.state = { errors: [] }
+	}
+
+	componentWillUpdate(nextProps) {
+		if (!this.props.data.user && nextProps.data.user) {
+			// redirect to dashboard
+			hashHistory.push('/dashboard')
+		}
 	}
 
 	onSubmit({email, password}) {
@@ -35,4 +42,6 @@ class RegisterForm extends Component {
 	}
 }
 
-export default graphql(registerMutation)(RegisterForm)
+export default graphql(currentUserQuery)(
+	graphql(registerMutation)(RegisterForm)
+)

@@ -7,6 +7,7 @@ import { Router, hashHistory, Route, IndexRoute } from 'react-router'
 
 import App from './components/App'
 import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm';
 
 const networkInterface = createNetworkInterface({
 	opts: {
@@ -26,6 +27,7 @@ const Root = () => {
 		<Router history={hashHistory}>
 			<Route path="/" component={App}>
 				<Route path="login" component={LoginForm} />
+				<Route path="signup" component={RegisterForm} />
 			</Route>
 		</Router>
 	</ApolloProvider>
